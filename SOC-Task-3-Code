@@ -63,8 +63,8 @@ files.download('SOC-Plot-1-naman.png')
 
 
 test2=plt.figure()
-plt.plot(x_axis, dy, color = 'yellow')
-plt.plot(x_axis, yg1, color = 'run')
+plt.plot(x_axis, dy, color = 'red')
+plt.plot(x_axis, yg1, color = 'yellow')
 plt.plot(x_axis, yg2, color = 'green')
 plt.plot(x_axis, yg3, color = 'blue')
 plt.plot(x_axis, yg4, color = 'purple')
