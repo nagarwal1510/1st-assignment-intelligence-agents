@@ -1,0 +1,59 @@
+#importing packages that i ll be using
+import numpy as np   #for array
+import random      
+from random import randint      #for random choice
+import matplotlib.pyplot as plt     #for graph ploting
+from google.colab import files      #for saving files
+
+            
+x_axis= []                  # declaring a variable for grpah plotting
+y_axis= []                  # declaring a variable for grpah plotting
+y=0                         # declaring a variable for count no runs 
+t=0                         # for calculating the sum of all iterations
+
+for n in range(100):        # starting a loop to run code 100 times
+  x= np.zeros(10000)        # declaring array
+  x[4999] = 1               # changing a 5000th value to 1
+  m=0                       # variable for calculating no of iterations
+  a=1                       # variable for loop condition
+  x_axis.append(y)          # linking no.of runs to x-axis
+  y=y+1                     # icreasing value as many time the code proceed
+  while(a<=10000):          # starting a loop which will continue till all values changes to 1
+    for i in range(0,9999):
+      if x[i]==1:
+        b=random.sample([0,1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,1],k=1)          
+        c=random.sample([0,1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,1],k=1)
+        if(b==[1]): 
+          x[abs(i-1)]=1      # now putting conditions on adjacent no.s 
+        if(c==[1]):    
+          x[(i+1) % 10000]=1
+
+    for w in range(5):
+      z= np.random.randint(0,10000,size=2)  # choosing two random no. for swapping nd then swapping them using 2 other variables j & k
+      j=x[z[0]]      
+      k=x[z[1]]
+      x[z[0]]=k
+      x[z[1]]=j
+
+    num1=0                  # declaring a variable to calculate no. of 1s
+    m=m+1  
+                       # increasing the value of m as the no. of iterations increases
+    for b in range(0,10000):   # creating a loop to calculate no. of 1s after every iteration
+      if x[b] ==1:
+        num1= num1 +1
+        
+    a=num1                     # giving a the value of no.s of 1 to check that the loop has to be run again or not
+    if(a==10000): 
+      q=m              # creating a condition to automatically end the first loop when no.s of 1 reaches 1000
+      break   
+  y_axis.append(q) 
+  t=t+q      # linking no. of 1s to y-axis
+avg=t/100
+print(avg)
+test = plt.figure()
+plt.plot(x_axis,y_axis)      # linking x-axis & y-axis and also giving names to them
+plt.xlabel('no. of runs')
+plt.ylabel('no. of iterations')
+test.show()      
+test.savefig('SOC-Plot-2-naman.png')
+files.download('SOC-Plot-2-naman.png')     
