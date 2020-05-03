@@ -1,0 +1,18 @@
+from numpy import exp, array, random, dot
+
+
+training_set_inputs = array([[1, 0, 1], [0, 0, 1], [1, 1, 0], [1, 1, 1]])    # training set. we have four examples each consisting of three values and one output
+training_set_outputs = array([[1, 0, 1, 1]]).T
+
+
+random.seed(2)     #seed the random no. so that it generates the same number every time the program runs
+
+weights = 2 * random.random((3, 1)) - 1 #we assign random weights to 3*1 matrix, with value in the range(-1,1)
+
+
+for iteration in range(10000):     #repeating the step 10000 times to train it
+    
+    output = 1 / (1 + exp(-(dot(training_set_inputs,weights))))
+    weights += dot(training_set_inputs.T, (training_set_outputs - output) * output * (1 - output))
+
+print(1 / (1 + exp(-(dot(array([1, 0, 1]),weights)))))    #testing neural network with a new example
